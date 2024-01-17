@@ -30,7 +30,7 @@ Future<void> main() async {
           .thenAnswer((_) async => Right(mockReturnNumberTrivia));
 
       // act
-      final Either<Failure, NumberTrivia>? caseReturnNumberTrivia =
+      final Either<Failure, NumberTrivia?>? caseReturnNumberTrivia =
           await useCase(NoParams());
 
       // assert
