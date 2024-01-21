@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:number_trivia/core/error/exceptions.dart';
 
 import '../../../../core/platform/network_info.dart';
@@ -15,13 +16,13 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   final NetworkInfo networkInfo;
 
   NumberTriviaRepositoryImpl(
-      {required this.remoteDataSource,
-      required this.localDataSource,
-      required this.networkInfo});
+      {@required this.remoteDataSource,
+      @required this.localDataSource,
+      @required this.networkInfo});
 
   @override
-  Future<Either<Failure, NumberTrivia?>?>? getConcreteNumberTrivia(
-    int? number,
+  Future<Either<Failure, NumberTrivia>> getConcreteNumberTrivia(
+    int number,
   ) async {
     networkInfo.isConnected;
 
@@ -36,7 +37,7 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
   }
 
   @override
-  Future<Either<Failure, NumberTrivia?>?>? getRandomNumberTrivia() {
+  Future<Either<Failure, NumberTrivia>> getRandomNumberTrivia() {
     // TODO: implement getRandomNumberTrivia
     return null;
   }

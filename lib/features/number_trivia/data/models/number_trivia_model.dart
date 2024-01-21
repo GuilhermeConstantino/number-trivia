@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '../../domain/entities/number_trivia.dart';
 
 class NumberTriviaModel extends NumberTrivia {
   const NumberTriviaModel({
-    required super.text,
-    required super.number,
+    @required String text,
+    @required int number,
   });
 
   factory NumberTriviaModel.fromJson(Map<String, dynamic> json) {

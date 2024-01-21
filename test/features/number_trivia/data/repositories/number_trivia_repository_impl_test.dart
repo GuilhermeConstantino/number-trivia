@@ -18,10 +18,10 @@ class MockLocalDataSource extends Mock implements NumberTriviaLocalDataSource {}
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
 void main() {
-  late NumberTriviaRepositoryImpl repository;
-  late MockRemoteDataSource mockRemoteDataSource;
-  late MockLocalDataSource mockLocalDataSource;
-  late MockNetworkInfo mockNetworkInfo;
+  NumberTriviaRepositoryImpl repository;
+  MockRemoteDataSource mockRemoteDataSource;
+  MockLocalDataSource mockLocalDataSource;
+  MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockRemoteDataSource();
@@ -92,7 +92,7 @@ void main() {
         // // assert
         verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
         verifyZeroInteractions(mockLocalDataSource);
-        expect(result, Left<Failure, NumberTrivia?>(ServerFailure()));
+        expect(result, Left<Failure, NumberTrivia>(ServerFailure()));
       });
     });
 
@@ -101,20 +101,20 @@ void main() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
 
-      // test(
-      //   'should return last locally cached data when the cached data is present',
-      //   () async {
-      //     // arrange
-      //     NumberTriviaModel cachedNumberTrivia =
-      //         const NumberTriviaModel(text: 'test cache', number: 2);
-      //     mockLocalDataSource.cacheNumberTrivia(cachedNumberTrivia);
-      //     // act
-      //     final result = await repository.getConcreteNumberTrivia(tNumber);
-      //     // assert
-      //     verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
-      //     expect(result, Right(cachedNumberTrivia));
-      //   },
-      // );
+      test(
+        'should return last locally cached data when the cached data is present',
+        () async {
+          // arrange
+          NumberTriviaModel cachedNumberTrivia =
+              const NumberTriviaModel(text: 'test cache', number: 2);
+          mockLocalDataSource.cacheNumberTrivia(cachedNumberTrivia);
+          // act
+          final result = await repository.getConcreteNumberTrivia(tNumber);
+          // assert
+          verify(mockRemoteDataSource.getConcreteNumberTrivia(tNumber));
+          expect(result, Right(cachedNumberTrivia));
+        },
+      );
     });
   });
 }

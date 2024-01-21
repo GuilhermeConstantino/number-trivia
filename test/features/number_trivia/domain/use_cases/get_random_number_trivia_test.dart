@@ -11,8 +11,8 @@ class MockNumberTriviaRepository extends Mock
     implements NumberTriviaRepository {}
 
 Future<void> main() async {
-  late MockNumberTriviaRepository repository;
-  late GetRandomNumberTrivia useCase;
+  MockNumberTriviaRepository repository;
+  GetRandomNumberTrivia useCase;
 
   setUp(() {
     repository = MockNumberTriviaRepository();
@@ -30,7 +30,7 @@ Future<void> main() async {
           .thenAnswer((_) async => Right(mockReturnNumberTrivia));
 
       // act
-      final Either<Failure, NumberTrivia?>? caseReturnNumberTrivia =
+      final Either<Failure, NumberTrivia> caseReturnNumberTrivia =
           await useCase(NoParams());
 
       // assert

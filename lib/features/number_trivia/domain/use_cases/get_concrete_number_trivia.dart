@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:number_trivia/core/error/failures.dart';
 import 'package:number_trivia/core/use_cases/usecase.dart';
 import 'package:number_trivia/features/number_trivia/domain/entities/number_trivia.dart';
@@ -12,7 +13,7 @@ class GetConcreteNumberTrivia implements UseCase<NumberTrivia, Params> {
   GetConcreteNumberTrivia(this.repository);
 
   @override
-  Future<Either<Failure, NumberTrivia?>?> call(Params params) async {
+  Future<Either<Failure, NumberTrivia>> call(Params params) async {
     return await repository.getConcreteNumberTrivia(params.number);
   }
 }
@@ -20,8 +21,8 @@ class GetConcreteNumberTrivia implements UseCase<NumberTrivia, Params> {
 class Params extends Equatable {
   final int number;
 
-  const Params({required this.number});
+  const Params({@required this.number});
 
   @override
-  List<Object?> get props => [number];
+  List<Object> get props => [number];
 }
